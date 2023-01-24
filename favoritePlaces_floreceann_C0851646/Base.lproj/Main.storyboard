@@ -1,24 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="favoritePlaces_floreceann_C0851646" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0y-p5-K9W">
+                                <rect key="frame" x="1" y="59" width="390" height="44"/>
+                                <items>
+                                    <navigationItem id="hDx-IM-NIK">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Cw5-dZ-UWP"/>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="compactAppearance" backgroundEffect="systemUltraThinMaterial">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite Places to visit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVd-sg-MPa">
+                                <rect key="frame" x="10" y="122.99999999999999" width="177.33333333333334" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHp-XM-5LD">
+                                <rect key="frame" x="170" y="783" width="55" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus.circle.fill" catalog="system" title=" "/>
+                                <connections>
+                                    <segue destination="h9j-Fu-sro" kind="show" id="Idf-56-T8t"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Elr-e7-Az4">
+                                <rect key="frame" x="10" y="163.33333333333331" width="373" height="599.66666666666674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Elr-e7-Az4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="4Km-5k-Cns"/>
+                            <constraint firstItem="zHp-XM-5LD" firstAttribute="top" secondItem="Elr-e7-Az4" secondAttribute="bottom" constant="20" id="8Dm-66-6Vd"/>
+                            <constraint firstItem="I0y-p5-K9W" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="8fN-ff-SII"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I0y-p5-K9W" secondAttribute="trailing" constant="2" id="8me-89-MUk"/>
+                            <constraint firstItem="zHp-XM-5LD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="9tp-Hh-Lwv"/>
+                            <constraint firstItem="zHp-XM-5LD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KtU-2B-pFC"/>
+                            <constraint firstItem="I0y-p5-K9W" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cmb-Df-DhH"/>
+                            <constraint firstItem="LVd-sg-MPa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="kEL-ka-IFW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zHp-XM-5LD" secondAttribute="trailing" constant="168" id="nr6-Wd-lsh"/>
+                            <constraint firstItem="LVd-sg-MPa" firstAttribute="top" secondItem="I0y-p5-K9W" secondAttribute="bottom" constant="20" id="spf-7N-uZQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Elr-e7-Az4" secondAttribute="trailing" constant="10" id="wap-5t-NM3"/>
+                            <constraint firstItem="Elr-e7-Az4" firstAttribute="top" secondItem="LVd-sg-MPa" secondAttribute="bottom" constant="20" id="ylr-7s-eXZ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="118.32061068702289" y="-34.507042253521128"/>
+        </scene>
+        <!--Add Favorite Place View Controller-->
+        <scene sceneID="aNC-8O-shf">
+            <objects>
+                <viewController id="h9j-Fu-sro" customClass="AddFavoritePlaceViewController" customModule="favoritePlaces_floreceann_C0851646" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z99-ty-PUU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="kmK-63-zfK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VQO-qD-kAA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sWw-Gq-dpz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="865" y="-35"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
