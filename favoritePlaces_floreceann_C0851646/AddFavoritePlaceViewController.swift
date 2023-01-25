@@ -12,10 +12,16 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
+protocol AddFavoritePlaceViewControllerDelegate {
+    func reloadTableview()
+}
+
 class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegate {
 
     var locationManager = CLLocationManager()
     var userLocation: CLLocationCoordinate2D!
+    var delegate: AddFavoritePlaceViewControllerDelegate?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var resultSearchController:UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
@@ -73,8 +79,6 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
                     if let placeMark = placemarks?[0] {
                         
                         if placeMark.locality != nil {
-                            self.myFavoritePlace = Place(name: placeMark.name, thoroughfare: placeMark.thoroughfare, locality: placeMark.locality, administrativeArea: placeMark.administrativeArea,  postalCode: placeMark.postalCode, country: placeMark.country,  latitude: coordinate.latitude, longitude: coordinate.longitude)
-
                             annotation.title = placeMark.name
                             annotation.coordinate = coordinate
                             
@@ -85,6 +89,17 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
                             }
                             
                             self.map.addAnnotation(annotation)
+                            
+                            var newPlace = Place(context: self.context)
+                            newPlace.name = placeMark.name
+                            newPlace.thoroughfare = placeMark.thoroughfare
+                            newPlace.locality = placeMark.locality
+                            newPlace.administrativeArea = placeMark.administrativeArea
+                            newPlace.postalCode = placeMark.postalCode
+                            newPlace.latitude = coordinate.latitude
+                            newPlace.longitude = coordinate.longitude
+                            self.savePlace()
+                            self.delegate?.reloadTableview()
                         }
                     }
                 }
@@ -118,7 +133,16 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
 extension AddFavoritePlaceViewController: HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark){
         
-        self.myFavoritePlace = Place(name: placemark.name, thoroughfare: placemark.thoroughfare, locality: placemark.locality, administrativeArea: placemark.administrativeArea,  postalCode: placemark.postalCode, country: placemark.country,  latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+        var newPlace = Place(context: self.context)
+        newPlace.name = placemark.name
+        newPlace.thoroughfare = placemark.thoroughfare
+        newPlace.locality = placemark.locality
+        newPlace.administrativeArea = placemark.administrativeArea
+        newPlace.postalCode = placemark.postalCode
+        newPlace.latitude = placemark.coordinate.latitude
+        newPlace.longitude = placemark.coordinate.latitude
+        self.savePlace()
+        self.delegate?.reloadTableview()
         
         selectedPin = placemark
         map.removeAnnotations(map.annotations)

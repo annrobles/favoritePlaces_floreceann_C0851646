@@ -18,6 +18,7 @@
 		700E80402980A34E0097FD4D /* AddFavoritePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E803F2980A34E0097FD4D /* AddFavoritePlaceViewController.swift */; };
 		700E80422980A4890097FD4D /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80412980A4890097FD4D /* LocationSearchTable.swift */; };
 		700E80462980A74B0097FD4D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80452980A74B0097FD4D /* Place.swift */; };
+		700E804A2980B9E00097FD4D /* AddFavoritePlaceDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80492980B9E00097FD4D /* AddFavoritePlaceDao.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		700E803F2980A34E0097FD4D /* AddFavoritePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritePlaceViewController.swift; sourceTree = "<group>"; };
 		700E80412980A4890097FD4D /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		700E80452980A74B0097FD4D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		700E80492980B9E00097FD4D /* AddFavoritePlaceDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritePlaceDao.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				700E803F2980A34E0097FD4D /* AddFavoritePlaceViewController.swift */,
 				700E80412980A4890097FD4D /* LocationSearchTable.swift */,
 				700E80452980A74B0097FD4D /* Place.swift */,
+				700E80492980B9E00097FD4D /* AddFavoritePlaceDao.swift */,
 			);
 			path = favoritePlaces_floreceann_C0851646;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				700E80422980A4890097FD4D /* LocationSearchTable.swift in Sources */,
+				700E804A2980B9E00097FD4D /* AddFavoritePlaceDao.swift in Sources */,
 				700E802129809CBB0097FD4D /* ViewController.swift in Sources */,
 				700E803E2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift in Sources */,
 				700E80462980A74B0097FD4D /* Place.swift in Sources */,
