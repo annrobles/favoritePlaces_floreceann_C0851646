@@ -16,6 +16,8 @@
 		700E802C29809CBC0097FD4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700E802A29809CBC0097FD4D /* LaunchScreen.storyboard */; };
 		700E803E2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E803D2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift */; };
 		700E80402980A34E0097FD4D /* AddFavoritePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E803F2980A34E0097FD4D /* AddFavoritePlaceViewController.swift */; };
+		700E80422980A4890097FD4D /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80412980A4890097FD4D /* LocationSearchTable.swift */; };
+		700E80462980A74B0097FD4D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80452980A74B0097FD4D /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		700E802D29809CBC0097FD4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		700E803D2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewSearchDelegate.swift; sourceTree = "<group>"; };
 		700E803F2980A34E0097FD4D /* AddFavoritePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritePlaceViewController.swift; sourceTree = "<group>"; };
+		700E80412980A4890097FD4D /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		700E80452980A74B0097FD4D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				700E802529809CBB0097FD4D /* favoritePlaces_floreceann_C0851646.xcdatamodeld */,
 				700E803D2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift */,
 				700E803F2980A34E0097FD4D /* AddFavoritePlaceViewController.swift */,
+				700E80412980A4890097FD4D /* LocationSearchTable.swift */,
+				700E80452980A74B0097FD4D /* Place.swift */,
 			);
 			path = favoritePlaces_floreceann_C0851646;
 			sourceTree = "<group>";
@@ -147,8 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				700E80422980A4890097FD4D /* LocationSearchTable.swift in Sources */,
 				700E802129809CBB0097FD4D /* ViewController.swift in Sources */,
 				700E803E2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift in Sources */,
+				700E80462980A74B0097FD4D /* Place.swift in Sources */,
 				700E80402980A34E0097FD4D /* AddFavoritePlaceViewController.swift in Sources */,
 				700E801D29809CBB0097FD4D /* AppDelegate.swift in Sources */,
 				700E801F29809CBB0097FD4D /* SceneDelegate.swift in Sources */,

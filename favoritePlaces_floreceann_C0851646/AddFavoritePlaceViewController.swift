@@ -6,45 +6,64 @@
 //
 
 import UIKit
+import MapKit
+
+protocol HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
 
 class AddFavoritePlaceViewController: UIViewController {
 
+    var resultSearchController:UISearchController? = nil
+    var selectedPin:MKPlacemark? = nil
+    var places: [Place] = [Place]()
+    @IBOutlet weak var map: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable as? any UISearchResultsUpdating
+        
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        
+        locationSearchTable.mapView = map
+        
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.searchController = resultSearchController
+        
+        locationSearchTable.handleMapSearchDelegate = self
     }
 
 }
 
 extension AddFavoritePlaceViewController: HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark){
-        var marker: String?
         
-//        cityCnt = cities.count
-//
-//        if cityCnt == 0 {
-//            marker = "A"
-//        }
-//        else if cityCnt == 1 {
-//            marker = "B"
-//        }
-//        else {
-//            marker = "C"
-//        }
+        let place = Place(name: placemark.name, thoroughfare: placemark.thoroughfare, locality: placemark.locality, administrativeArea: placemark.administrativeArea,  postalCode: placemark.postalCode, country: placemark.country,  latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+        self.places.append(place)
         
-        let distance: Double = self.getDistance(from: self.userLocation, to:  placemark.coordinate)
-        let place = City(title: marker,
-                         subtitle: placemark.locality!,
-                         coordinate: placemark.coordinate)
+        selectedPin = placemark
+        map.removeAnnotations(map.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
         
-        self.citiesInAnnotation.append(placemark.locality!)
-        self.cities.append(place)
-        self.map.addAnnotation(place)
-        self.distancesBetweenCityUser.append("\(String.init(format: "%2.f",  round(distance * 0.001)))km")
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         
-        if self.cities.count == 3 {
-            self.addPolyline()
-            self.addPolygon()
+        if let city = placemark.locality,
+        let state = placemark.administrativeArea,
+        let postalcode = placemark.postalCode {
+            annotation.subtitle = "\(city) \(state) \(postalcode)"
         }
+        map.addAnnotation(annotation)
+        
+        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+        map.setRegion(region, animated: true)
     }
 }
