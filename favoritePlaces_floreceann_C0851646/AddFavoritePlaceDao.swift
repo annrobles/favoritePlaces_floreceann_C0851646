@@ -11,7 +11,7 @@ extension AddFavoritePlaceViewController {
         do {
             try context.save()
         } catch {
-            print("Error saving category \(error.localizedDescription)")
+            print("Error saving place \(error.localizedDescription)")
         }
     }
 }

@@ -60,6 +60,10 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
         navigationItem.searchController = resultSearchController
         
         locationSearchTable.handleMapSearchDelegate = self
+        
+        if myFavoritePlace != nil {
+            addAnnotationForFavoritePlace(place: myFavoritePlace!)
+        }
     }
     
     @objc func dropPin(sender: UITapGestureRecognizer) {
@@ -128,6 +132,20 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
         
         map.setRegion(region, animated: true)
     }
+    
+    func addAnnotationForFavoritePlace(place: Place) {
+        let annotation = MKPointAnnotation()
+        annotation.title = place.name
+        annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        
+        if let city = place.locality,
+        let state = place.administrativeArea,
+        let postalcode = place.postalCode {
+            annotation.subtitle = "\(city) \(state) \(postalcode)"
+        }
+        
+        map.addAnnotation(annotation)
+    }
 }
 
 extension AddFavoritePlaceViewController: HandleMapSearch {
@@ -172,6 +190,7 @@ extension AddFavoritePlaceViewController: MKMapViewDelegate {
         }
 
         let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+        annotationView.isDraggable = true
         annotationView.canShowCallout = true
         annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
 

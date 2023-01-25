@@ -19,6 +19,7 @@
 		700E80422980A4890097FD4D /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80412980A4890097FD4D /* LocationSearchTable.swift */; };
 		700E80462980A74B0097FD4D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80452980A74B0097FD4D /* Place.swift */; };
 		700E804A2980B9E00097FD4D /* AddFavoritePlaceDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E80492980B9E00097FD4D /* AddFavoritePlaceDao.swift */; };
+		700E804C2980BDF30097FD4D /* TableViewDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700E804B2980BDF30097FD4D /* TableViewDao.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		700E80412980A4890097FD4D /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		700E80452980A74B0097FD4D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		700E80492980B9E00097FD4D /* AddFavoritePlaceDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritePlaceDao.swift; sourceTree = "<group>"; };
+		700E804B2980BDF30097FD4D /* TableViewDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDao.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				700E80412980A4890097FD4D /* LocationSearchTable.swift */,
 				700E80452980A74B0097FD4D /* Place.swift */,
 				700E80492980B9E00097FD4D /* AddFavoritePlaceDao.swift */,
+				700E804B2980BDF30097FD4D /* TableViewDao.swift */,
 			);
 			path = favoritePlaces_floreceann_C0851646;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				700E803E2980A0BB0097FD4D /* PlaceTableViewSearchDelegate.swift in Sources */,
 				700E80462980A74B0097FD4D /* Place.swift in Sources */,
 				700E80402980A34E0097FD4D /* AddFavoritePlaceViewController.swift in Sources */,
+				700E804C2980BDF30097FD4D /* TableViewDao.swift in Sources */,
 				700E801D29809CBB0097FD4D /* AppDelegate.swift in Sources */,
 				700E801F29809CBB0097FD4D /* SceneDelegate.swift in Sources */,
 				700E802729809CBB0097FD4D /* favoritePlaces_floreceann_C0851646.xcdatamodeld in Sources */,

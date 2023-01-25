@@ -25,27 +25,6 @@ class ViewController: UIViewController {
         
         fetch()
     }
-    
-    func fetch() {
-        do {
-            let request = Place.fetchRequest() as NSFetchRequest<Place>
-            
-//            if searchText.text != "" {
-//                let predicate = NSPredicate(format: "name CONTAINS %@", searchText.text!)
-//                request.predicate = predicate
-//            }
-            
-            self.places = try context.fetch(request)
-        
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        catch {
-            
-        }
-    }
-    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -67,14 +46,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let action = UIContextualAction(style: .destructive, title: "Delete") {
             (action, view, completionHandler) in
             
-//            if let contactToRemove = self.contacts?[indexPath.row] {
-//                self.context.delete(contactToRemove)
-//            }
-
-            do {
-                try self.context.save()
-            } catch  {
-                
+            if let placeToRemove = self.places?[indexPath.row] {
+                self.delete(place: placeToRemove)
             }
             
             self.fetch()
@@ -87,12 +60,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let place = self.places?[indexPath.row]
         
         if let favoritePlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddFavoritePlaceViewController") as? AddFavoritePlaceViewController {
-            //addViewContronller.contact = contact
-            //self.navigationController?.pushViewController(AddFavoritePlaceViewController, animated: true)
+            favoritePlaceViewController.myFavoritePlace = place
+            self.navigationController?.pushViewController(favoritePlaceViewController, animated: true)
         }
     }
 }
-
 
 extension ViewController: AddFavoritePlaceViewControllerDelegate {
     func reloadTableview() {
