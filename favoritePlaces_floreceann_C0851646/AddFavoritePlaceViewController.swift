@@ -60,10 +60,6 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
         navigationItem.searchController = resultSearchController
         
         locationSearchTable.handleMapSearchDelegate = self
-        
-        if myFavoritePlace != nil {
-            addAnnotationForFavoritePlace(place: myFavoritePlace!)
-        }
     }
     
     @objc func dropPin(sender: UITapGestureRecognizer) {
@@ -125,26 +121,19 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
                          longitude: CLLocationDegrees) {
         let latDelta: CLLocationDegrees = 0.05
         let lngDelta: CLLocationDegrees =  0.05
-        
         let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lngDelta)
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let region = MKCoordinateRegion(center: location, span: span)
+        let location: CLLocationCoordinate2D!
         
-        map.setRegion(region, animated: true)
-    }
-    
-    func addAnnotationForFavoritePlace(place: Place) {
-        let annotation = MKPointAnnotation()
-        annotation.title = place.name
-        annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-        
-        if let city = place.locality,
-        let state = place.administrativeArea,
-        let postalcode = place.postalCode {
-            annotation.subtitle = "\(city) \(state) \(postalcode)"
+        if myFavoritePlace != nil {
+            addAnnotationForFavoritePlace(place: myFavoritePlace!)
+            location = CLLocationCoordinate2D(latitude: myFavoritePlace!.latitude, longitude: myFavoritePlace!.longitude)
         }
-        
-        map.addAnnotation(annotation)
+        else {
+            location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+
+        let region = MKCoordinateRegion(center: location, span: span)
+        map.setRegion(region, animated: true)
     }
 }
 
