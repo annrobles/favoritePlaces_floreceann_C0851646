@@ -24,12 +24,8 @@ extension ViewController {
         do {
             let request = Place.fetchRequest() as NSFetchRequest<Place>
             
-//            if searchText.text != "" {
-//                let predicate = NSPredicate(format: "name CONTAINS %@", searchText.text!)
-//                request.predicate = predicate
-//            }
-            
             self.places = try context.fetch(request)
+            self.filteredPlaces = self.places
         
             DispatchQueue.main.async {
                 self.tableView.reloadData()

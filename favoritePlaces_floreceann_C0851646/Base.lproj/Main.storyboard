@@ -21,7 +21,11 @@
                                 <rect key="frame" x="1" y="103" width="390" height="44"/>
                                 <items>
                                     <navigationItem id="hDx-IM-NIK">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Cw5-dZ-UWP"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Cw5-dZ-UWP">
+                                            <connections>
+                                                <action selector="filterButton:" destination="BYZ-38-t0r" id="vVa-jo-R2m"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <navigationBarAppearance key="compactAppearance" backgroundEffect="systemUltraThinMaterial">

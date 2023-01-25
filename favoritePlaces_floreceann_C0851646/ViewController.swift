@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var places:[Place]?
+    var filteredPlaces:[Place]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,16 +26,22 @@ class ViewController: UIViewController {
         
         fetch()
     }
+    
+    @IBAction func filterButton(_ sender: UIBarButtonItem) {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        present(searchController, animated: true, completion: nil)
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.places?.count ?? 0
+        return self.filteredPlaces?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        if let place = self.places?[indexPath.row] {
+        if let place = self.filteredPlaces?[indexPath.row] {
             cell.textLabel?.text = "\(place.name ?? "")"
         }
         
@@ -46,7 +53,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let action = UIContextualAction(style: .destructive, title: "Delete") {
             (action, view, completionHandler) in
             
-            if let placeToRemove = self.places?[indexPath.row] {
+            if let placeToRemove = self.filteredPlaces?[indexPath.row] {
                 self.delete(place: placeToRemove)
             }
             
@@ -57,7 +64,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let place = self.places?[indexPath.row]
+        let place = self.filteredPlaces?[indexPath.row]
         
         if let favoritePlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddFavoritePlaceViewController") as? AddFavoritePlaceViewController {
             favoritePlaceViewController.myFavoritePlace = place

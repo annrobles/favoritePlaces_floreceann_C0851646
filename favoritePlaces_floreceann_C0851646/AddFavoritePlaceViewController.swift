@@ -90,14 +90,25 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
                             
                             self.map.addAnnotation(annotation)
                             
-                            var newPlace = Place(context: self.context)
-                            newPlace.name = placeMark.name
-                            newPlace.thoroughfare = placeMark.thoroughfare
-                            newPlace.locality = placeMark.locality
-                            newPlace.administrativeArea = placeMark.administrativeArea
-                            newPlace.postalCode = placeMark.postalCode
-                            newPlace.latitude = coordinate.latitude
-                            newPlace.longitude = coordinate.longitude
+                            if self.myFavoritePlace == nil {
+                                var newPlace = Place(context: self.context)
+                                newPlace.name = placeMark.name
+                                newPlace.thoroughfare = placeMark.thoroughfare
+                                newPlace.locality = placeMark.locality
+                                newPlace.administrativeArea = placeMark.administrativeArea
+                                newPlace.postalCode = placeMark.postalCode
+                                newPlace.latitude = coordinate.latitude
+                                newPlace.longitude = coordinate.longitude
+                            }
+                            else {
+                                self.myFavoritePlace?.name = placeMark.name
+                                self.myFavoritePlace?.thoroughfare = placeMark.thoroughfare
+                                self.myFavoritePlace?.locality = placeMark.locality
+                                self.myFavoritePlace?.administrativeArea = placeMark.administrativeArea
+                                self.myFavoritePlace?.postalCode = placeMark.postalCode
+                                self.myFavoritePlace?.latitude = coordinate.latitude
+                                self.myFavoritePlace?.longitude = coordinate.longitude
+                            }
                             self.savePlace()
                             self.delegate?.reloadTableview()
                         }
@@ -118,7 +129,8 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
     }
     
     func displayLocation(latitude: CLLocationDegrees,
-                         longitude: CLLocationDegrees) {
+                         longitude: CLLocationDegrees)
+    {
         let latDelta: CLLocationDegrees = 0.05
         let lngDelta: CLLocationDegrees =  0.05
         let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lngDelta)
@@ -134,6 +146,20 @@ class AddFavoritePlaceViewController: UIViewController, CLLocationManagerDelegat
 
         let region = MKCoordinateRegion(center: location, span: span)
         map.setRegion(region, animated: true)
+    }
+    
+    func addAnnotationForFavoritePlace(place: Place) {
+        let annotation = MKPointAnnotation()
+        annotation.title = place.name
+        annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        
+        if let city = place.locality,
+        let state = place.administrativeArea,
+        let postalcode = place.postalCode {
+            annotation.subtitle = "\(city) \(state) \(postalcode)"
+        }
+        
+        map.addAnnotation(annotation)
     }
 }
 
@@ -172,22 +198,30 @@ extension AddFavoritePlaceViewController: HandleMapSearch {
 }
 
 extension AddFavoritePlaceViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-
+        
         if annotation is MKUserLocation {
             return nil
         }
-
-        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+        
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin")
+        annotationView.animatesDrop = true
+        annotationView.pinTintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         annotationView.isDraggable = true
         annotationView.canShowCallout = true
         annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-
-        //annotationView.detailCalloutAccessoryView = label
-
-        //label.widthAnchor.constraint(lessThanOrEqualToConstant: label.frame.width).isActive = true
-        //label.heightAnchor.constraint(lessThanOrEqualToConstant: 90.0).isActive = true
-
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
+        switch newState {
+        case .starting:
+            view.dragState = .dragging
+        case .ending, .canceling:
+            print("ending")
+            view.dragState = .none
+        default: break
+        }
     }
 }
